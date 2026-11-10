@@ -1,0 +1,14 @@
+{
+  "name": "Metadata Ingestion Pipeline",
+  "parameters": {"trigger_name": "manual", "run_id": "required", "table_id": "optional"},
+  "activities": [
+    {"name": "Load active metadata", "type": "Lookup"},
+    {"name": "For each entity", "type": "ForEach", "dependsOn": ["Load active metadata"]},
+    {"name": "Extract and land", "type": "Copy", "scope": "For each entity"},
+    {"name": "Process and validate", "type": "Notebook", "scope": "For each entity"},
+    {"name": "Commit state", "type": "Script", "condition": "Succeeded"},
+    {"name": "Log failure", "type": "Script", "condition": "Failed"}
+  ],
+  "success": "Commit Delta, advance watermark, log metrics",
+  "failure": "Preserve watermark, retain stage, propagate error"
+}

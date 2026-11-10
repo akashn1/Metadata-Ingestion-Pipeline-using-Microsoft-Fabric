@@ -1,0 +1,12 @@
+{
+  "project": "Metadata Ingestion Pipeline",
+  "entities": [{
+    "entity_id": "customer", "active": true, "step_order": 10,
+    "processing_method": "incremental", "source_type": "csv",
+    "connection_key": "onelake_landing", "source_object": "customers.csv",
+    "staging_path": "Files/landing/customer/{run_id}/", "target_lakehouse": "migration_lh",
+    "target_table": "silver_customer", "write_mode": "merge", "merge_keys": ["customer_id"],
+    "watermark": {"column": "updated_at", "datatype": "timestamp", "value": "1900-01-01T00:00:00Z"},
+    "quality_rules": [{"type": "not_null", "column": "customer_id", "severity": "error", "action": "quarantine"}]
+  }]
+}
