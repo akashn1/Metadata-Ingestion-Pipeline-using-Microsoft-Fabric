@@ -416,17 +416,3 @@ The project does not contain:
 
 **Akash Nath**
 
-## Contributing
-
-Contributions, suggestions, and improvements are welcome.
-
-To contribute:
-
-1. Fork the repository.
-2. Create a feature branch.
-3. Make and test your changes.
-4. Submit a pull request with a clear description.
-
-## License
-
-This project is available under the MIT License.
